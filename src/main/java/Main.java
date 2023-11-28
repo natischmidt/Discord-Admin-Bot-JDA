@@ -9,7 +9,7 @@ public class Main
 {
     public static void main(String[] args) throws LoginException {
 
-        JDA bot = JDABuilder.createDefault("token here")
+        JDA bot = JDABuilder.createDefault("MTE3OTE0NzgwNjc5MTk2MjY4NA.GFygU1.XT9uhdb4ev9ZnU6b5R22QjXCAUk8hV9vz3kYPo")
                 .setActivity(Activity.playing("test"))
                 .build();
 
