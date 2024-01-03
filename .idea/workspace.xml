@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="75826d79-5dd2-4a36-ac72-0264f7caad89" name="Changes" comment="configuration done, tested with discord server">
+    <list default="true" id="75826d79-5dd2-4a36-ac72-0264f7caad89" name="Changes" comment="added Greeting event, tests passed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +54,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;build.tools&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -64,7 +63,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.OnJoinTest.onGuildMemberJoin_shouldSendMessage">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="bot" />
@@ -72,8 +71,50 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="All in bot" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bot" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OnJoinTest.onGuildMemberJoin_shouldSendMessage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bot" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="OnJoinTest" />
+      <option name="METHOD_NAME" value="onGuildMemberJoin_shouldSendMessage" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="onJoinTest.onGuildMemberJoin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bot" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="onJoinTest" />
+      <option name="METHOD_NAME" value="onGuildMemberJoin" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="onJoinTest.testOnGuildMemberJoin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bot" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="onJoinTest" />
+      <option name="METHOD_NAME" value="testOnGuildMemberJoin" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.OnJoinTest.onGuildMemberJoin_shouldSendMessage" />
+        <item itemvalue="JUnit.onJoinTest.testOnGuildMemberJoin" />
+        <item itemvalue="JUnit.onJoinTest.onGuildMemberJoin" />
+        <item itemvalue="JUnit.All in bot" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -88,7 +129,12 @@
       <updated>1701200290473</updated>
       <workItem from="1701200291616" duration="1759000" />
       <workItem from="1701452424912" duration="2830000" />
-      <workItem from="1701460993305" duration="673000" />
+      <workItem from="1701460993305" duration="1874000" />
+      <workItem from="1701510890965" duration="1593000" />
+      <workItem from="1701524202863" duration="1830000" />
+      <workItem from="1701686204848" duration="650000" />
+      <workItem from="1704271252552" duration="3625000" />
+      <workItem from="1704280209834" duration="941000" />
     </task>
     <task id="LOCAL-00001" summary="start up">
       <created>1701200468500</created>
@@ -111,7 +157,28 @@
       <option name="project" value="LOCAL" />
       <updated>1701201604101</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="testing">
+      <created>1701461747263</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1701461747263</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added Greeting event">
+      <created>1701511285334</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1701511285334</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added Greeting event, tests passed">
+      <created>1704281140439</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1704281140439</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,7 +189,34 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="user">
+                    <value>
+                      <list>
+                        <option value="*" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
@@ -131,6 +225,13 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="start up" />
     <MESSAGE value="configuration done, tested with discord server" />
-    <option name="LAST_COMMIT_MESSAGE" value="configuration done, tested with discord server" />
+    <MESSAGE value="testing" />
+    <MESSAGE value="added Greeting event" />
+    <MESSAGE value="added Greeting event, tests passed" />
+    <option name="LAST_COMMIT_MESSAGE" value="added Greeting event, tests passed" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
