@@ -1,5 +1,6 @@
 package events;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -10,14 +11,9 @@ import java.util.function.Consumer;
 
 public class RoleCreationListener extends ListenerAdapter {
 
-    private final User user;
-    private final Consumer<String> callback;
     private String roleName;
-    private final MessageReceivedEvent originalEvent;
+    private ButtonInteractionEvent  originalEvent;
     private boolean promptAgain = false;
-
-
-
     private static final Map<String, Integer> colorMap = new HashMap<>();
 
     static {
@@ -49,15 +45,14 @@ public class RoleCreationListener extends ListenerAdapter {
         colorMap.put("skyblue", 0x87CEEB);
     }
 
-    public RoleCreationListener(User user, Consumer<String> callback, MessageReceivedEvent originalEvent) {
-        this.user = user;
-        this.callback = callback;
-        this.originalEvent = originalEvent;
+    public RoleCreationListener(User user, ButtonInteractionEvent event) {
+        this.originalEvent = event;
     }
+
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        if (event.getAuthor().equals(originalEvent.getAuthor())) {
+        if (event.getAuthor().equals(originalEvent.getUser())) {
             String content = event.getMessage().getContentRaw();
 
             if (roleName == null) {
@@ -72,10 +67,8 @@ public class RoleCreationListener extends ListenerAdapter {
                                 .setName(roleName)
                                 .setColor(color)
                                 .setHoisted(true)
-                                .queue(createdRole -> {
-                                    originalEvent.getChannel().sendMessage("New role created: "
-                                            + createdRole.getName()).queue();
-                                });
+                                .queue(createdRole -> originalEvent.getChannel().sendMessage("New role created: "
+                                        + createdRole.getName()).queue());
                     } else {
                         String validColorNames = String.join(", ", colorMap.keySet());
                         originalEvent.getChannel().sendMessage("Invalid color name." +
