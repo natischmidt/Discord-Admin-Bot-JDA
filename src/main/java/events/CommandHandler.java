@@ -51,17 +51,16 @@ public class CommandHandler extends ListenerAdapter {
 
         Member memberToBan = Objects.requireNonNull(event.getOption("user")).getAsMember();
 
-        if (memberToBan != null) {
+        try {
+            assert memberToBan!= null;
             memberToBan.ban(7, "Banned by command").queue(
                     success -> event.getHook().editOriginal("User " + memberToBan.getUser().getAsTag() + " has been banned.").queue(),
                     error -> event.getHook().editOriginal("Failed to ban user: " + error.getMessage()).queue()
             );
-        } else {
-            event.getHook().editOriginal("User not found or not specified.").queue();
+        } catch (HierarchyException e){
+            event.getHook().editOriginal("Error: " + e.getMessage()).queue();
         }
     }
-
-
 
     private void handleNicknameCommand(SlashCommandInteractionEvent event) {
         if (event.getUser().isBot()) return;
@@ -77,11 +76,9 @@ public class CommandHandler extends ListenerAdapter {
                     error -> event.getHook().editOriginal("Failed to set nickname: " + error.getMessage()).queue()
             );
         } catch (HierarchyException e) {
-            // The bot doesn't have permission to modify the nickname of the specified member
             event.getHook().editOriginal("Error: " + e.getMessage()).queue();
         }
     }
-
 
     private void handleKickCommand(SlashCommandInteractionEvent event) {
         if (event.getUser().isBot()) return;
@@ -89,15 +86,17 @@ public class CommandHandler extends ListenerAdapter {
 
         Member memberToKick = Objects.requireNonNull(event.getOption("user")).getAsMember();
 
-        if (memberToKick != null) {
+        try {
+            assert memberToKick != null;
             memberToKick.kick("Kicked by command").queue(
                     success -> event.getHook().editOriginal("User " + memberToKick.getUser().getAsTag() + " has been kicked.").queue(),
                     error -> event.getHook().editOriginal("Failed to kick user: " + error.getMessage()).queue()
             );
-        } else {
-            event.getHook().editOriginal("User not found or not specified.").queue();
+        } catch (HierarchyException e) {
+            event.getHook().editOriginal("Error: " + e.getMessage()).queue();
         }
     }
+
     private void sendHelpMenu(@NotNull SlashCommandInteractionEvent event) {
         if (event.getUser().isBot()) return;
         event.deferReply().queue();
