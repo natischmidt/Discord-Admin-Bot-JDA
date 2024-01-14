@@ -1,8 +1,7 @@
 package events;
-import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.exceptions.HierarchyException;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,14 +14,13 @@ import java.util.stream.Collectors;
 public class CommandHandler extends ListenerAdapter {
 
 
-
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         String command = event.getName();
 
         switch (command) {
-            case "info" -> event.reply("This is a simple bot.").queue();
-            case "server" -> handleServerCommand(event);
+            case "bot-info" -> event.reply("This is a simple bot.").queue();
+            case "server-info" -> handleServerCommand(event);
             case "help" -> sendHelpMenu(event);
             case "members" -> handleMembersCommand(event);
             case "ban" -> handleBanCommand(event);
@@ -32,6 +30,8 @@ public class CommandHandler extends ListenerAdapter {
             case "list-roles" -> handleListRolesCommand(event);
             case "role-info" -> handleRoleInfoCommand(event);
             case "nickname" -> handleNicknameCommand(event);
+            case "create-channel" -> handleCreateChannelCommand(event);
+            case "delete-channel" -> handleDeleteChannelCommand(event);
         }
     }
 
@@ -49,7 +49,7 @@ public class CommandHandler extends ListenerAdapter {
         if (event.getUser().isBot()) return;
         event.deferReply().queue();
 
-        Member memberToBan = event.getOption("user").getAsMember();
+        Member memberToBan = Objects.requireNonNull(event.getOption("user")).getAsMember();
 
         if (memberToBan != null) {
             memberToBan.ban(7, "Banned by command").queue(
@@ -61,28 +61,33 @@ public class CommandHandler extends ListenerAdapter {
         }
     }
 
+
+
     private void handleNicknameCommand(SlashCommandInteractionEvent event) {
         if (event.getUser().isBot()) return;
         event.deferReply().queue();
 
-        Member member = event.getOption("user").getAsMember();
-        String nickname = event.getOption("nickname").getAsString();
+        Member member = Objects.requireNonNull(event.getOption("user")).getAsMember();
+        String nickname = Objects.requireNonNull(event.getOption("nickname")).getAsString();
 
-        if (member != null) {
+        try {
+            assert member != null;
             member.modifyNickname(nickname).queue(
                     success -> event.getHook().editOriginal("Nickname for " + member.getUser().getAsTag() + " set to: " + nickname).queue(),
                     error -> event.getHook().editOriginal("Failed to set nickname: " + error.getMessage()).queue()
             );
-        } else {
-            event.getHook().editOriginal("Member not found or not specified.").queue();
+        } catch (HierarchyException e) {
+            // The bot doesn't have permission to modify the nickname of the specified member
+            event.getHook().editOriginal("Error: " + e.getMessage()).queue();
         }
     }
+
 
     private void handleKickCommand(SlashCommandInteractionEvent event) {
         if (event.getUser().isBot()) return;
         event.deferReply().queue();
 
-        Member memberToKick = event.getOption("user").getAsMember();
+        Member memberToKick = Objects.requireNonNull(event.getOption("user")).getAsMember();
 
         if (memberToKick != null) {
             memberToKick.kick("Kicked by command").queue(
@@ -97,18 +102,22 @@ public class CommandHandler extends ListenerAdapter {
         if (event.getUser().isBot()) return;
         event.deferReply().queue();
 
-        String helpMenu = "You can use the following commands:\n" +
-                "/info - Get information about the bot\n" +
-                "/server - Get information about the server\n" +
-                "/help - Show this help menu\n" +
-                "/ban - Ban a member\n" +
-                "/kick - Kick a member\n" +
-                "/members - Get information about the server's members\n" +
-                "/member-list - Get a list of all members in the server\n" +
-                "/create-role - Create a new role with a specified name and color\n" +
-                "/list-roles - Displays a list of all roles in the server\n" +
-                "/role-info - Displays information about a specific role\n" +
-                "/nickname - Set or modify the nickname of a member\n";
+        String helpMenu = """
+                You can use the following commands:
+                /bot-info - Get information about the bot
+                /server-info - Get information about the server
+                /help - Show this help menu
+                /ban - Ban a member
+                /kick - Kick a member
+                /members - Get information about the server's members
+                /member-list - Get a list of all members in the server
+                /create-role - Create a new role with a specified name and color
+                /list-roles - Displays a list of all roles in the server
+                /role-info - Displays information about a specific role
+                /nickname - Set or modify the nickname of a member
+                /create-channel - Creates a new text or voice channel with specified settings
+                /delete-channel - Deletes the current or specified channel
+                """;
 
         event.getHook().sendMessage(helpMenu).queue();
 
@@ -122,13 +131,13 @@ public class CommandHandler extends ListenerAdapter {
         if (event.getUser().isBot()) return;
         event.deferReply().queue();
 
-        String roleName = event.getOption("name").getAsString();
-        String colorName = event.getOption("color").getAsString();
+        String roleName = Objects.requireNonNull(event.getOption("name")).getAsString();
+        String colorName = Objects.requireNonNull(event.getOption("color")).getAsString();
         Integer color = colorMap.get(colorName.toLowerCase());
 
         try {
             if (color != null) {
-                Role createdRole =(event.getGuild()).createRole()
+                Role createdRole =(Objects.requireNonNull(event.getGuild())).createRole()
                         .setName(roleName)
                         .setColor(color)
                         .setHoisted(true)
@@ -150,7 +159,7 @@ public class CommandHandler extends ListenerAdapter {
         if (event.getUser().isBot()) return;
         event.deferReply().queue();
 
-        List<Role> roles = event.getGuild().getRoles();
+        List<Role> roles = Objects.requireNonNull(event.getGuild()).getRoles();
         String roleList = roles.stream()
                 .map(Role::getName)
                 .collect(Collectors.joining(", "));
@@ -162,17 +171,13 @@ public class CommandHandler extends ListenerAdapter {
         if (event.getUser().isBot()) return;
         event.deferReply().queue();
 
-        Role role = event.getOption("role").getAsRole();
-        if (role != null) {
-            String roleInfo = "Role Name: " + role.getName() +
-                    "\nRole ID: " + role.getId() +
-                    "\nColor: " + role.getColor() +
-                    "\nPosition: " + role.getPosition();
+        Role role = Objects.requireNonNull(event.getOption("role")).getAsRole();
+        String roleInfo = "Role Name: " + role.getName() +
+                "\nRole ID: " + role.getId() +
+                "\nColor: " + role.getColor() +
+                "\nPosition: " + role.getPosition();
 
-            event.getHook().editOriginal(roleInfo).queue();
-        } else {
-            event.getHook().editOriginal("Role not found or not specified.").queue();
-        }
+        event.getHook().editOriginal(roleInfo).queue();
     }
 
     public void handleMembersCommand(@NotNull SlashCommandInteractionEvent event) {
@@ -199,6 +204,53 @@ public class CommandHandler extends ListenerAdapter {
         );
 
         event.getHook().sendMessage("List of Members:\n" + membersList).queue();
+    }
+
+    private void handleCreateChannelCommand(SlashCommandInteractionEvent event) {
+        if (event.getUser().isBot()) return;
+        event.deferReply().queue();
+
+        String channelName = Objects.requireNonNull(event.getOption("name")).getAsString();
+        String channelType = Objects.requireNonNull(event.getOption("type")).getAsString();
+        ChannelType type = ChannelType.TEXT;
+
+        if (channelType.equalsIgnoreCase("voice")) {
+            type = ChannelType.VOICE;
+        }
+        Guild guild = event.getGuild();
+        Category category = event.getOption("category") != null ?
+                (Category) Objects.requireNonNull(event.getOption("category")).getAsGuildChannel() : null;
+
+        if (category == null || category.getType() == type) {
+            assert guild != null;
+            guild.createTextChannel(channelName)
+                    .setType(type)
+                    .setParent(category)
+                    .queue(
+                            createdChannel -> event.getHook().editOriginal("New channel created: " + createdChannel.getAsMention()).queue(),
+                            error -> event.getHook().editOriginal("Failed to create channel: " + error.getMessage()).queue()
+                    );
+        } else {
+            event.getHook().editOriginal("Channel type and category type must match.").queue();
+        }
+    }
+
+
+    private void handleDeleteChannelCommand(SlashCommandInteractionEvent event) {
+        if (event.getUser().isBot()) return;
+        event.deferReply().queue();
+
+        TextChannel channelToDelete = event.getOption("channel") != null ?
+                Objects.requireNonNull(event.getOption("channel")).getAsTextChannel() : (TextChannel) event.getChannel();
+
+        if (channelToDelete != null) {
+            channelToDelete.delete().queue(
+                    success -> event.getHook().editOriginal("Channel deleted: " + channelToDelete.getName()).queue(),
+                    error -> event.getHook().editOriginal("Failed to delete channel: " + error.getMessage()).queue()
+            );
+        } else {
+            event.getHook().editOriginal("Channel not found or not specified.").queue();
+        }
     }
 
 }
