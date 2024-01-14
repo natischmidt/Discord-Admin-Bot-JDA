@@ -5,6 +5,8 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.util.Objects;
+
 public class Greeting extends ListenerAdapter
 {
     @Override
@@ -15,8 +17,8 @@ public class Greeting extends ListenerAdapter
         Message message = event.getMessage();
         String content = message.getContentRaw();
 
-        if (content.toLowerCase().equals("hi lexi")) {
-            String name = event.getMember().getEffectiveName();
+        if (content.equalsIgnoreCase("hi lexi")) {
+            String name = Objects.requireNonNull(event.getMember()).getEffectiveName();
             MessageChannel channel = event.getChannel();
             channel.sendMessage("Hi " + name ).queue();
         }
