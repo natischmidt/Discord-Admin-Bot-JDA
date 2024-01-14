@@ -26,9 +26,8 @@ public class Main {
                 Commands.slash("info", "Displays information about the bot"),
                 Commands.slash("server", "Displays server information"),
                 Commands.slash("members", "Displays member count"),
-                Commands.slash("memberlist", "Displays a full list of members"),
-
-                Commands.slash("createrole", "Creates a new role")
+                Commands.slash("member-list", "Displays a full list of members"),
+                Commands.slash("create-role", "Creates a new role")
                         .addOption(OptionType.STRING, "name","Enter the name of the role:")
                         .addOption(OptionType.STRING, "color", "Enter the role color (e.g., red, blue, black)")
         ).queue();
