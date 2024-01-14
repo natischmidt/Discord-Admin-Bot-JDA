@@ -38,7 +38,15 @@ public class CommandHandler extends ListenerAdapter {
     private void sendHelpMenu(@NotNull SlashCommandInteractionEvent event) {
         if (event.getUser().isBot()) return;
         event.deferReply().queue();
-        event.getHook().sendMessage("You can use the following commands").queue();
+
+        String helpMenu = "You can use the following commands:\n" + "/info - Get information about the bot.\n" +
+                "/server - Get information about the server.\n" +
+                "/help - Show this help menu.\n" +
+                "/members - Get information about the server's members.\n" +
+                "/member-list - Get a list of all members in the server.\n" +
+                "/create-role - Create a new role with a specified name and color.\n";
+
+        event.getHook().sendMessage(helpMenu).queue();
 
     }
     private static final Map<String, Integer> colorMap = new HashMap<>();

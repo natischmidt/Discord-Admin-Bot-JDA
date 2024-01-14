@@ -27,6 +27,7 @@ public class Main {
                 Commands.slash("server", "Displays server information"),
                 Commands.slash("members", "Displays member count"),
                 Commands.slash("member-list", "Displays a full list of members"),
+                Commands.slash("help", "Displays all commands"),
                 Commands.slash("create-role", "Creates a new role")
                         .addOption(OptionType.STRING, "name","Enter the name of the role:")
                         .addOption(OptionType.STRING, "color", "Enter the role color (e.g., red, blue, black)")
