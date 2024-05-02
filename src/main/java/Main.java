@@ -7,7 +7,10 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
+import net.dv8tion.jda.api.utils.ChunkingFilter;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import javax.security.auth.login.LoginException;
 
@@ -17,6 +20,9 @@ public class Main {
         JDA jda = JDABuilder.createDefault
                  ("MTE3OTE0NzgwNjc5MTk2MjY4NA.GFygU1.XT9uhdb4ev9ZnU6b5R22QjXCAUk8hV9vz3kYPo")
                 .setActivity(Activity.playing("being a bot"))
+                .setChunkingFilter(ChunkingFilter.ALL) // enable member chunking for all guilds
+                .setMemberCachePolicy(MemberCachePolicy.ALL)
+                .enableIntents(GatewayIntent.GUILD_MEMBERS)
                 .addEventListeners(new Greeting(), new onJoin(), new CommandHandler(),new AutoCompleteBot())
                 .build()
                 .awaitReady();
