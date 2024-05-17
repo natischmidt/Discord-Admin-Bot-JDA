@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="75826d79-5dd2-4a36-ac72-0264f7caad89" name="Changes" comment="added Greeting event, tests passed">
+    <list default="true" id="75826d79-5dd2-4a36-ac72-0264f7caad89" name="Changes" comment="added caching method due to changes in JDA , so member counting works again">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,6 +33,9 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="2YomQVgT62XNQSSMoqmxB9B59m5" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -45,6 +48,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -54,55 +58,76 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.uml&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="events" />
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.OnJoinTest.onGuildMemberJoin_shouldSendMessage">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+  <component name="RunManager" selected="JUnit.CommandHandlerTest">
+    <configuration name="CommandHandlerTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="bot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="events.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="events" />
+      <option name="MAIN_CLASS_NAME" value="events.CommandHandlerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in bot" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CommandHandlerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="bot" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="MAIN_CLASS_NAME" value="CommandHandlerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OnJoinTest.onGuildMemberJoin_shouldSendMessage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CommandHandlerTest.testHandleMembersCommand" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="bot" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="OnJoinTest" />
-      <option name="METHOD_NAME" value="onGuildMemberJoin_shouldSendMessage" />
+      <option name="MAIN_CLASS_NAME" value="CommandHandlerTest" />
+      <option name="METHOD_NAME" value="testHandleMembersCommand" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="onJoinTest.onGuildMemberJoin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RoleCreationListenerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="bot" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="onJoinTest" />
-      <option name="METHOD_NAME" value="onGuildMemberJoin" />
-      <option name="TEST_OBJECT" value="method" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="events.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="events" />
+      <option name="MAIN_CLASS_NAME" value="events.RoleCreationListenerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="onJoinTest.testOnGuildMemberJoin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="bot" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="onJoinTest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="events.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="events" />
+      <option name="MAIN_CLASS_NAME" value="events.onJoinTest" />
       <option name="METHOD_NAME" value="testOnGuildMemberJoin" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -111,11 +136,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.OnJoinTest.onGuildMemberJoin_shouldSendMessage" />
+        <item itemvalue="JUnit.CommandHandlerTest" />
+        <item itemvalue="JUnit.CommandHandlerTest (1)" />
         <item itemvalue="JUnit.onJoinTest.testOnGuildMemberJoin" />
-        <item itemvalue="JUnit.onJoinTest.onGuildMemberJoin" />
-        <item itemvalue="JUnit.All in bot" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.RoleCreationListenerTest" />
+        <item itemvalue="JUnit.CommandHandlerTest.testHandleMembersCommand" />
       </list>
     </recent_temporary>
   </component>
@@ -134,7 +159,45 @@
       <workItem from="1701524202863" duration="1830000" />
       <workItem from="1701686204848" duration="650000" />
       <workItem from="1704271252552" duration="3625000" />
-      <workItem from="1704280209834" duration="941000" />
+      <workItem from="1704280209834" duration="3746000" />
+      <workItem from="1704376127739" duration="5286000" />
+      <workItem from="1704702188675" duration="1839000" />
+      <workItem from="1704715373756" duration="606000" />
+      <workItem from="1704721465361" duration="615000" />
+      <workItem from="1704788362609" duration="1843000" />
+      <workItem from="1704801960627" duration="2115000" />
+      <workItem from="1704809877237" duration="4035000" />
+      <workItem from="1704875259097" duration="620000" />
+      <workItem from="1704877463051" duration="538000" />
+      <workItem from="1704878025024" duration="4000" />
+      <workItem from="1704878201398" duration="1388000" />
+      <workItem from="1704961374864" duration="2000" />
+      <workItem from="1704961387052" duration="12000" />
+      <workItem from="1704992378270" duration="1618000" />
+      <workItem from="1704994004674" duration="385000" />
+      <workItem from="1704994398561" duration="94000" />
+      <workItem from="1705007132163" duration="158000" />
+      <workItem from="1705007298616" duration="2818000" />
+      <workItem from="1705046952930" duration="1256000" />
+      <workItem from="1705050848520" duration="613000" />
+      <workItem from="1705063597841" duration="614000" />
+      <workItem from="1705147320836" duration="33000" />
+      <workItem from="1705147502929" duration="6740000" />
+      <workItem from="1705176699885" duration="1072000" />
+      <workItem from="1705177787923" duration="1571000" />
+      <workItem from="1705189737797" duration="1289000" />
+      <workItem from="1705234765574" duration="9797000" />
+      <workItem from="1705307714637" duration="1567000" />
+      <workItem from="1705320427697" duration="25000" />
+      <workItem from="1705320460377" duration="629000" />
+      <workItem from="1705479342305" duration="2150000" />
+      <workItem from="1712656409555" duration="1114000" />
+      <workItem from="1712736865301" duration="4334000" />
+      <workItem from="1713911323112" duration="63000" />
+      <workItem from="1714644246368" duration="2240000" />
+      <workItem from="1714693019418" duration="269000" />
+      <workItem from="1714987491239" duration="1155000" />
+      <workItem from="1715004091101" duration="611000" />
     </task>
     <task id="LOCAL-00001" summary="start up">
       <created>1701200468500</created>
@@ -178,7 +241,77 @@
       <option name="project" value="LOCAL" />
       <updated>1704281140439</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added onJoin event, tests passed">
+      <created>1704281209989</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1704281209989</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added commandsHandler, role creating, showing serverinfo , displaying the memberlist is now possible">
+      <created>1704993388976</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1704993388976</updated>
+    </task>
+    <task id="LOCAL-00009" summary="added buttons for the command interface">
+      <created>1705148646680</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1705148646680</updated>
+    </task>
+    <task id="LOCAL-00010" summary="replaced methods to use slash commands">
+      <created>1705190678218</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1705190678218</updated>
+    </task>
+    <task id="LOCAL-00011" summary="replaced methods to use slash commands updated">
+      <created>1705236944287</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1705236944287</updated>
+    </task>
+    <task id="LOCAL-00012" summary="added helpmenu info for help commands">
+      <created>1705237355865</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1705237355865</updated>
+    </task>
+    <task id="LOCAL-00013" summary="added more commands for server manangment">
+      <created>1705241478125</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1705241478125</updated>
+    </task>
+    <task id="LOCAL-00014" summary="added more commands for server manangment">
+      <created>1705242795529</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1705242795529</updated>
+    </task>
+    <task id="LOCAL-00015" summary="added try catch for commands">
+      <created>1705243124672</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1705243124672</updated>
+    </task>
+    <task id="LOCAL-00016" summary="added caching method due to changes in JDA , so member counting works again">
+      <created>1714646133924</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1714646133925</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,7 +361,16 @@
     <MESSAGE value="testing" />
     <MESSAGE value="added Greeting event" />
     <MESSAGE value="added Greeting event, tests passed" />
-    <option name="LAST_COMMIT_MESSAGE" value="added Greeting event, tests passed" />
+    <MESSAGE value="added onJoin event, tests passed" />
+    <MESSAGE value="added commandsHandler, role creating, showing serverinfo , displaying the memberlist is now possible" />
+    <MESSAGE value="added buttons for the command interface" />
+    <MESSAGE value="replaced methods to use slash commands" />
+    <MESSAGE value="replaced methods to use slash commands updated" />
+    <MESSAGE value="added helpmenu info for help commands" />
+    <MESSAGE value="added more commands for server manangment" />
+    <MESSAGE value="added try catch for commands" />
+    <MESSAGE value="added caching method due to changes in JDA , so member counting works again" />
+    <option name="LAST_COMMIT_MESSAGE" value="added caching method due to changes in JDA , so member counting works again" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
